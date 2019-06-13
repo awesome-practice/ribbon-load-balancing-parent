@@ -1,0 +1,57 @@
+#say-hello:
+#  ribbon:
+#    eureka:
+#      enabled: true
+
+server:
+  port: 8092
+
+eureka:
+  client:
+    serviceUrl:
+      #      defaultZone: http://dev.ufotosoft.com:8093/eureka/
+#      defaultZone: http://192.168.60.199:1111/eureka/
+      defaultZone: http://localhost:8093/eureka/
+  instance:
+    leaseRenewalIntervalInSeconds: 6
+    leaseExpirationDurationInSeconds: 6
+    prefer-ip-address: true
+    instance-enabled-onit: false
+    initial-status: up
+    namespace: 'eureka'
+
+logging:
+  level:
+    root: warn
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000
+#        timeout:
+#          enabled: false
+ribbon:
+  ReadTimeout: 5500 # default to 5000
+  ConnectTimeout: 5500 #default to 2000
+  MaxAutoRetries: 1
+  MaxAutoRetriesNextServer: 2
+#  eager-load:
+#    enabled: true
+#    clients:
+#      - ribbon-practice-server-say-hello
+  MaxConnectionsPerHost: 250 #default 50
+  MaxTotalConnections: 2500 #default 200
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+#          - hystrix.stream
+#          - "*"
+  endpoint:
+    health:
+      show-details: always

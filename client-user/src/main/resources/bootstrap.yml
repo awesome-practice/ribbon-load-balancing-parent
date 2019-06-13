@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: ribbon-practice-client-user
+  cloud:
+    config:
+      uri: http://localhost:8888
+      enabled: true
+  config:
+    additional-location: classpath:/config/auth_config.yml
+
+

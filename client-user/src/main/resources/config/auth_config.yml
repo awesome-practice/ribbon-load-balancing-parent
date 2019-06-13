@@ -1,0 +1,5 @@
+# demo
+my:
+  servers:
+    - dev.example.com
+    - another.example.com

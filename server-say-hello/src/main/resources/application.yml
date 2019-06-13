@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: ribbon-practice-server-say-hello
+
+server:
+  port: 8095
+  connection-timeout: 5s
+  tomcat:
+    min-spare-threads: 10
+    max-threads: 100
+    accept-count: 100
+    max-connections: 10000
+
+eureka:
+  client:
+    serviceUrl:
+#      defaultZone: http://dev.ufotosoft.com:8093/eureka/
+      defaultZone: http://localhost:8093/eureka/
+    healthcheck:
+      enabled: false
+  instance:
+    leaseRenewalIntervalInSeconds: 6
+    leaseExpirationDurationInSeconds: 6
+    prefer-ip-address: true
+    instance-enabled-onit: false
+    initial-status: out_of_service
+    namespace: 'eureka'
+    instance-id: '${spring.cloud.client.hostname}:${spring.application.name}:${server.port}'
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+#  metrics:
+#    export:
+#      atlas:
+#        uri: http://dev.ufotosoft.com:7101/api/v1/publish
+
+logging:
+  level:
+    root: warn
+
+ribbon:
+  MaxConnectionsPerHost: 200 #default 50
+  MaxTotalConnections: 2000 #default 200
+
